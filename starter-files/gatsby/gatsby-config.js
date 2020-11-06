@@ -7,9 +7,11 @@ export default {
     title: `Blaze Pizza's`,
     sitUrl: `https://gatsby.pizza`,
     description: `The best pizza place in Hubli`,
+    twitter: '@blazePizzas',
   },
 
   plugins: [
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-source-sanity',
