@@ -18,17 +18,30 @@ function Order({ data }) {
   const { values, updateValue } = useForm({
     name: '',
     email: '',
+    mapleSyrup: '',
   });
 
-  const { addToOder, removeFromOrder, order } = usePizza({
+  const {
+    addToOder,
+    removeFromOrder,
+    order,
+    error,
+    loading,
+    message,
+    submitOrder,
+  } = usePizza({
     pizzas,
-    inputs: values,
+    values,
   });
+  console.log(message);
+  if (message) {
+    return <p>{message}</p>;
+  }
 
   return (
     <>
       <SEO title="Order a Pizza!!" />
-      <OrderStyles>
+      <OrderStyles onSubmit={submitOrder}>
         <fieldset>
           <legend>Your Info</legend>
           <label htmlFor="name">Name</label>
@@ -44,6 +57,13 @@ function Order({ data }) {
             type="email"
             name="email"
             value={values.email}
+          />
+          <input
+            onChange={updateValue}
+            type="mapleSyrup"
+            name="mapleSyrup"
+            value={values.mapleSyrup}
+            className="mapleSyrup"
           />
         </fieldset>
         <fieldset className="menu">
@@ -86,7 +106,10 @@ function Order({ data }) {
           <h3>
             Your Total is {formatMoney(calculateOrderTotal(order, pizzas))}
           </h3>
-          <button type="submit">Order Ahead</button>
+          <div>{error ? <p>Error: ${error}</p> : ''}</div>
+          <button disabled={loading} type="submit">
+            {loading ? 'Placing Order...' : 'Order Ahead'}
+          </button>
         </fieldset>
       </OrderStyles>
     </>
