@@ -33,7 +33,7 @@ function Order({ data }) {
     pizzas,
     values,
   });
-  console.log(message);
+
   if (message) {
     return <p>{message}</p>;
   }

@@ -51,7 +51,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ message: 'Boop Beep Bop zzssstt Good Bye!!!' }),
     };
   }
-  console.log(body);
+
   const requiredFields = ['email', 'name', 'order'];
 
   for (const field of requiredFields) {
